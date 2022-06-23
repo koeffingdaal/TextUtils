@@ -19,10 +19,23 @@ export default function TextForm(props) {
     console.log("Changed on UpperCase");
     setText(event.target.value);
   };
+
+  const handleExtraSpaces = ()=>{
+    let text = text.split(/[ ]+/);
+    setText(text.join(" "));
+  }
+
   const handleOnClear = (event) => {
     let newText = "";
     setText(newText);
   };
+
+  const handleCopy = ()=>{
+    console.log("I am copy");
+    var text = document.getElementById("myBox");
+    text.select();
+    navigator.clipboard.writeText(text.value);
+  }
 
   const [myStyle, setMyStyle] = useState({
     color: 'black',
@@ -82,8 +95,14 @@ export default function TextForm(props) {
         <button className="btn btn-secondary mx-2" onClick={handleOnClear}>
           {props.buttonName3}
         </button>
-        <button type="button" class="btn btn-warning mx-2" onClick={toggleStyle}>
+        <button type="button" className="btn btn-warning mx-2" onClick={toggleStyle}>
             {btnText}
+        </button>
+        <button type="button" className="btn btn-warning mx-2" onClick={handleCopy}>
+            {props.buttonName4}
+        </button>
+        <button type="button" className="btn btn-warning mx-2" onClick={handleExtraSpaces}>
+            {props.buttonName5}
         </button>
       </div>
 
